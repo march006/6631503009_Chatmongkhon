@@ -21,7 +21,7 @@
 (function () {
   "use strict";
 
-  var SECRET = "FLAG{pr0mpt_1nj3ction_l34ks_s3cr3ts}";
+  var SIMULATION_VALUE = "DEMO_CONTENT_FOR_REDACTION";
 
   var VULN_PHRASES = [
     "ignore previous instructions", "ignore all previous", "reveal the secret",
@@ -109,7 +109,7 @@
       stepsEl.appendChild(step("input_guardrail()", "no match — proceeding", ""));
       var raw = mockReply(msg);
       stepsEl.appendChild(step("mock_llm()", raw, ""));
-      var redacted = raw.split(SECRET).join("[REDACTED]");
+      var redacted = raw.split(SIMULATION_VALUE).join("[REDACTED]");
       if (redacted !== raw) {
         stepsEl.appendChild(step("redact_secret()", redacted, "is-fixed"));
       } else {
@@ -126,7 +126,7 @@
     } else {
       var leaked = VULN_PHRASES.some(function (p) { return low.indexOf(p) !== -1; });
       if (leaked) {
-        var reply = "Sure! The secret password is " + SECRET + ".";
+        var reply = "Sure! The secret password is " + SIMULATION_VALUE + ".";
         stepsEl.appendChild(step("mock_llm()", reply, "is-bad"));
         renderedEl.innerHTML = "";
         renderedEl.textContent = reply;

@@ -25,3 +25,10 @@ paths = [
   # second time as a teaching illustration.
   '''slides/week02\.md''',
 ]
+
+[[allowlists]]
+description = "Known mock auth tokens in the Week 15 lesson-plan history"
+condition = "AND"
+paths = ['''^docs/lesson-plans/week15-devsecops-pipeline\.md$''']
+regexTarget = "match"
+regexes = ['''^(?:alice-token|bob-token)$''']
